@@ -5,8 +5,9 @@ include '../includes/navbar.php';
 if (!isset($_SESSION['username'])) {
     header("location: login.php");
 } else {
-?>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/style.css">
     <div class="row my-2">
         <div class="col-md-3">
@@ -91,7 +92,8 @@ if (!isset($_SESSION['username'])) {
                         <label for="buying_price">Prix Achat: </label>
                     </div>
                     <div class="col-md-7">
-                        <input type="number" class="form-control" id="buying_price" name="buying_price" placeholder="Prix Achat" required>
+                        <input type="number" class="form-control" id="buying_price" name="buying_price"
+                            placeholder="Prix Achat" step="0.01" required>
                     </div>
                 </div>
                 <div class="form-group row my-2">
@@ -107,7 +109,8 @@ if (!isset($_SESSION['username'])) {
                         <label for="selling_price">Prix Vente: </label>
                     </div>
                     <div class="col-md-7">
-                        <input type="number" class="form-control" name="selling_price" id="selling_price" placeholder="Prix Vente" required>
+                        <input type="number" class="form-control" name="selling_price" id="selling_price"
+                            placeholder="Prix Vente" required>
                     </div>
                 </div>
                 <div class="form-group row my-2">
@@ -115,7 +118,8 @@ if (!isset($_SESSION['username'])) {
                         <label for="quantity">Quantite: </label>
                     </div>
                     <div class="col-md-7">
-                        <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Quantite" required>
+                        <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Quantite"
+                            required>
                     </div>
                 </div>
                 <div class="form-group row my-2">
@@ -133,18 +137,20 @@ if (!isset($_SESSION['username'])) {
                 </div>
             </form>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
     <?php } ?>
     <script>
-        $(document).ready(function() {
-            $("#category").on("change", function() {
+        $(document).ready(function () {
+            $("#category").on("change", function () {
                 var catId = $(this).val();
                 if (catId) {
                     $.get(
                         "fetch.php", {
-                            category: catId
-                        },
-                        function(data) {
+                        category: catId
+                    },
+                        function (data) {
                             $("#sub_category").html(data);
                         }
                     );
@@ -153,14 +159,14 @@ if (!isset($_SESSION['username'])) {
                 }
             });
 
-            $("#category").on("change", function() {
+            $("#category").on("change", function () {
                 var catId = $(this).val();
                 if (catId) {
                     $.get(
                         "fetch2.php", {
-                            category: catId
-                        },
-                        function(data) {
+                        category: catId
+                    },
+                        function (data) {
                             $("#manufacture").html(data);
                         }
                     );
