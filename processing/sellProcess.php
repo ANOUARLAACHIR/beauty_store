@@ -13,17 +13,19 @@ if (!isset($_SESSION['username'])) {
     $result = $conn->query($query);
     $row = $result->fetch_assoc();
     $quantity = $row['quantity'];
+    $buying_price = $row['buying_price'];
+    $selling_date = date('Y-m-d');
+    $revenue = ($selling_price - $buying_price) * $new_quantity;
+
     //get user
     $user = $_SESSION['username'];
     $userSql = "SELECT * FROM user WHERE username = '$user'";
     $userResult = $conn->query($userSql);
     $userRow = $userResult->fetch_assoc();
     $seller_id = $userRow['id'];
-    $buying_price = $row['buying_price'];
-    $selling_date = date('Y-m-d');
-    $revenue = ($selling_price - $buying_price) * $new_quantity;
+
     //Processing
-    if ($quantity > 0) {
+    if ($quantity > $new_quantity) {
         $insert_query = "INSERT INTO orders VALUES (null, $id, $new_quantity, $buying_price, $selling_price, '$selling_date', $seller_id, $revenue,'waiting...')";
         $insert_result = $conn->query($insert_query);
         if ($insert_result) {
@@ -34,17 +36,21 @@ if (!isset($_SESSION['username'])) {
                 $sucMsg .= "L ordre a été inséré avec succès<br />";
                 $sucMsg .= "La quantité a été mise à jour avec succès<br />";
                 header("location: ../index.php?sucmsg=$sucMsg");
+                exit();
             } else {
                 $errMsg .= "Un problème a été survenu lors de la mise à jour de quantité<br />";
                 header("location: ../index.php?errmsg=$errMsg");
+                exit();
             }
         } else {
             $errMsg .= "Un problème a été survenu lors de l insertion de l ordre<br />";
             header("location: ../index.php?errmsg=$errMsg");
+            exit();
         }
     } else {
         $errMsg .= "La quantité du stock est inférieure à la quantité demandé!<br />";
         header("location: ../index.php?errmsg=$errMsg");
+        exit();
     }
 }
 ?>
