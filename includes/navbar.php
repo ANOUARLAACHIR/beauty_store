@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="style/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Khalil's Beauty Store</title>
@@ -13,13 +14,15 @@
 
 <body>
     <header class="p-3 bg-dark text-white">
-        <div class="container">
+        <div>
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="<?php echo "/beauty_store/index.php" ?>" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <a href="<?php echo "/beauty_store/index.php" ?>"
+                    class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                     {KBS}
                 </a>
                 <div class="dropdown mx-2">
-                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         Crédits
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -45,7 +48,8 @@
                 </div>
 
                 <div class="dropdown mx-2">
-                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         Paiements
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -64,9 +68,21 @@
                     </ul>
                 </div>
 
+                <div class="dropdown mx-2">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Statistiques
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class='dropdown-item' href='/beauty_store/forms/productStats.php'>Produits</a></li>
+                    </ul>
+                </div>
+
                 <div class="offset-md-4 d-flex">
-                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="post" action="<?php echo "/beauty_store/index.php" ?>">
-                        <input type="search" class="form-control form-control-dark text-white bg-dark" name="search" placeholder="Chercher Produit" aria-label="Search">
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="post"
+                        action="<?php echo "/beauty_store/index.php" ?>">
+                        <input type="search" class="form-control form-control-dark text-white bg-dark" name="search"
+                            placeholder="Chercher Produit" aria-label="Search">
                     </form>
 
                     <div class="text-end">

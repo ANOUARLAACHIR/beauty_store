@@ -25,7 +25,7 @@ if (!isset($_SESSION['username'])) {
     $seller_id = $userRow['id'];
 
     //Processing
-    if ($quantity > $new_quantity) {
+    if ($quantity >= $new_quantity) {
         $insert_query = "INSERT INTO orders VALUES (null, $id, $new_quantity, $buying_price, $selling_price, '$selling_date', $seller_id, $revenue,'waiting...')";
         $insert_result = $conn->query($insert_query);
         if ($insert_result) {
