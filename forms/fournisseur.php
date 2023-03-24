@@ -15,7 +15,7 @@ if (!isset($_SESSION['username'])) {
         <div class="col-md-9 my-4">
             <div class="card col-md-10 bg-warning">
                 <div class="card-header text-center">
-                    Statistiques des Protuids
+                    Statistiques des Fournisseurs
                 </div>
             </div>
             <div class="row">
@@ -34,66 +34,62 @@ if (!isset($_SESSION['username'])) {
             </div>
             <div class="row">
                 <div class="col-md-10 my-2">
-                    <a href="/beauty_store/forms/productStats.php?op=sub_cat" class="btn btn-primary col-md-3">Par Sous
-                        Categorie</a>
-                    <a href="/beauty_store/forms/productStats.php?op=cat" class="btn btn-success col-md-3">Par Categorie</a>
+                    <a href="/beauty_store/forms/addSupplier.php" class="btn btn-primary col-md-3">Ajouter
+                        Fournisseur</a>
+                    <a href="/beauty_store/forms/fournisseur.php?op=suppliers" class="btn btn-success col-md-3">Liste
+                        Fournisseurs</a>
                 </div>
                 <div class="col-md-10 my-2">
                     <?php
                     if (isset($_GET['op'])) {
                         echo "<table class='table table-bordered table-responsive'>
                         <tr>";
-                        if ($_GET['op'] == 'sub_cat') {
-                            echo "<th>Sous Catégorie</th>";
+                        if ($_GET['op'] == 'suppliers') {
+                            echo "<th>Fournisseur</th>";
                         } else if ($_GET['op'] == 'cat') {
                             echo "<th>Catégorie</th>";
                         }
-                        echo "<th>Total Produits</th>
-                        <th>Total Argent</th>
+                        echo "<th>Téléphone</th>
+                        <th>Ville</th>
                         </tr>
                         ";
-                        if ($_GET['op'] == 'sub_cat')
-                            $sql = "SELECT * FROM sub_category";
+                        if ($_GET['op'] == 'suppliers')
+                            $sql = "SELECT * FROM supplier";
                         else if ($_GET['op'] == 'cat')
                             $sql = "SELECT * FROM category";
                         $result = $conn->query($sql);
-                        $totalGenMon = $totalGenProd = 0;
+                        //$totalGenMon = $totalGenProd = 0;
                         while ($row = $result->fetch_assoc()) {
                             $id = $row['id'];
-                            if ($_GET['op'] == 'sub_cat')
-                                $prod_sql = "SELECT * FROM product WHERE sub_category_id=$id";
-                            else if ($_GET['op'] == 'cat')
-                                $prod_sql = "SELECT * FROM product WHERE category=$id";
-                            $prod_result = $conn->query($prod_sql);
-                            $totalProd = $totalMon = 0;
-                            while ($prod_row = $prod_result->fetch_assoc()) {
-                                $totalMon += $prod_row['buying_price'] * $prod_row['quantity'];
-                                $totalProd += $prod_row['quantity'];
-                            }
-                            $totalGenMon += $totalMon;
-                            $totalGenProd += $totalProd;
-                            $zakat = $totalGenMon / 40;
+                            // if ($_GET['op'] == 'sub_cat')
+                            //     $prod_sql = "SELECT * FROM product WHERE sub_category_id=$id";
+                            // else if ($_GET['op'] == 'cat')
+                            //     $prod_sql = "SELECT * FROM product WHERE category=$id";
+                            // $prod_result = $conn->query($prod_sql);
+                            // $totalProd = $totalMon = 0;
+                            // while ($prod_row = $prod_result->fetch_assoc()) {
+                            //     $totalMon += $prod_row['buying_price'] * $prod_row['quantity'];
+                            //     $totalProd += $prod_row['quantity'];
+                            // }
+                            // $totalGenMon += $totalMon;
+                            // $totalGenProd += $totalProd;
+                            // $zakat = $totalGenMon / 40;
                             echo "<tr>
-                            <td><a href='/beauty_store/forms/";
-                            if ($_GET['op'] == 'sub_cat')
-                                echo "productBySub.php?sub_cat=" . $row['id'];
-                            if ($_GET['op'] == 'cat')
-                                echo "productByCat.php?cat=" . $row['id'];
-                            echo "'>" . $row['name'] . "</a></td>
-                            <td>$totalProd</td>
-                            <td>$totalMon</td>
+                            <td>" . $row['name'] . "</td>
+                            <td>0" . $row['tel'] . "</td>
+                            <td>" . $row['city'] . "</td>
                             </tr>";
                         }
 
-                        echo "<tr>
-                            <th>Total</th>
-                            <td>$totalGenProd</td>
-                            <td>$totalGenMon</td>
-                        </tr>
-                        <tr>
-                        <th>Zakat</th>
-                        <td colspan='2' class='text-center'>$zakat</td>
-                        </tr>";
+                        // echo "<tr>
+                        //     <th>Total</th>
+                        //     <td>$totalGenProd</td>
+                        //     <td>$totalGenMon</td>
+                        // </tr>
+                        // <tr>
+                        // <th>Zakat</th>
+                        // <td colspan='2' class='text-center'>$zakat</td>
+                        // </tr>";
                     }
                     ?>
                 </div>
