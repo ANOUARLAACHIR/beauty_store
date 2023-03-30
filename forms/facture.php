@@ -86,24 +86,17 @@ if (!isset($_SESSION['username'])) {
                                 </div>
                             </div>
                         </form>";
-                        } else {
-                            echo "<table class='table table-bordered table-responsive'>
-                        <tr>";
-                            if ($_GET['op'] == 'factures') {
-                                echo "<th>Facture</th>";
-                            } else if ($_GET['op'] == 'factpersup') {
-                                echo "<th>Facture</th>";
-                            }
-                            echo "<th>Date</th>
-                            <th>Montant</th>
-                            </tr>
-                            ";
-                            if ($_GET['op'] == 'factures')
-                                $sql = "SELECT * FROM facture";
-                            else if ($_GET['op'] == 'factpersup')
-                                $sql = "SELECT * FROM facture";
+                        } else if ($_GET['op'] == 'factures') {
+                            $sql = "SELECT * FROM facture";
                             $result = $conn->query($sql);
                             if ($result->num_rows > 0) {
+                                echo "<table class='table table-bordered table-responsive'>
+                                <tr>
+                                <th>Facture</th>
+                                <th>Date</th>
+                                <th>Montant</th>
+                                </tr>
+                                ";
                                 while ($row = $result->fetch_assoc()) {
                                     $id = $row['id_supplier'];
                                     $supplier_sql = "SELECT * FROM supplier WHERE id=$id";
@@ -115,6 +108,8 @@ if (!isset($_SESSION['username'])) {
                                     <td>" . $row['montant'] . "</td>
                                     </tr>";
                                 }
+                            } else {
+                                echo "<div class='alert alert-danger text-center'>La liste est vide!</div>";
                             }
                         }
                         ?>

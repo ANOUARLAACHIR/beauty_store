@@ -15,7 +15,13 @@ if (!isset($_SESSION['username'])) {
         <div class="col-md-9 my-4">
             <div class="card col-md-10 bg-warning">
                 <div class="card-header text-center">
-                    Statistiques des Fournisseurs
+                    Factures de Mr.
+                    <?php
+                    $id = $_GET['id'];
+                    $sql = "SELECT * FROM supplier";
+                    $result = $conn->query($sql);
+                    $row = $result->fetch_assoc();
+                    echo $row['name']; ?>
                 </div>
             </div>
             <div class="row">
@@ -34,36 +40,29 @@ if (!isset($_SESSION['username'])) {
             </div>
             <div class="row">
                 <div class="col-md-10 my-2">
-                    <a href="/beauty_store/forms/addSupplier.php" class="btn btn-primary col-md-3">Ajouter
-                        Fournisseur</a>
-                    <a href="/beauty_store/forms/fournisseur.php?op=suppliers" class="btn btn-success col-md-3">Liste
-                        Fournisseurs</a>
-                </div>
-                <div class="col-md-10 my-2">
                     <?php
-                    if (isset($_GET['op'])) {
+                    $factSql = "SELECT * FROM facture WHERE id_supplier=$id";
+                    $factRes = $conn->query($factSql);
+                    if ($factRes->num_rows > 0) {
                         echo "<table class='table table-bordered table-responsive'>
                         <tr>";
-                        if ($_GET['op'] == 'suppliers') {
-                            echo "<th>Fournisseur</th>";
-                        } else if ($_GET['op'] == 'cat') {
-                            echo "<th>Catégorie</th>";
-                        }
-                        echo "<th>Téléphone</th>
-                        <th>Ville</th>
+
+                        echo "<th>Facture</th>
+                        <th>Montant</th>
+                        <th>Date</th>
                         </tr>
                         ";
-                        if ($_GET['op'] == 'suppliers')
-                            $sql = "SELECT * FROM supplier";
-                        $result = $conn->query($sql);
-                        while ($row = $result->fetch_assoc()) {
-                            $id = $row['id'];
+                        while ($row = $factRes->fetch_assoc()) {
+                            $i = 1;
                             echo "<tr>
-                            <td><a href='/beauty_store/forms/factpersupp.php?id=" . $row['id'] . "'>" . $row['name'] . "</a></td>
-                            <td>0" . $row['tel'] . "</td>
-                            <td>" . $row['city'] . "</td>
+                            <td>$i</td>
+                            <td>" . $row['montant'] . "</td>
+                            <td>" . $row['date'] . "</td>
                             </tr>";
+                            $i++;
                         }
+                    } else {
+                        echo "<div class='alert alert-danger text-center'>Pas de Facture à L'instant</div>";
                     }
                     ?>
                 </div>
